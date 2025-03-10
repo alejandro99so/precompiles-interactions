@@ -36,6 +36,21 @@ const deployPrecompile = async (
         .send({ from: account[0].address });
       console.log({ disable });
     }
+  } else if (interaction == Interactions.TxAllowList) {
+    const _contract = constants.txAllowListConfig;
+    const _abi = constants.abiAllowList;
+    const contractInteraction = new web3.eth.Contract(_abi, _contract);
+    if (action == Actions.Enable) {
+      const enable = await contractInteraction.methods
+        .setEnabled(address)
+        .send({ from: account[0].address });
+      console.log({ enable });
+    } else if (action == Actions.Disable) {
+      const disable = await contractInteraction.methods
+        .setNone(address)
+        .send({ from: account[0].address });
+      console.log({ disable });
+    }
   }
 };
 
